@@ -18,6 +18,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
+
+      - name: Debug - List output files
+        run: |
+          pwd
+          ls -al
+          ls -al dist
+          ls -al dist/hotel-hub-app
+          
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
