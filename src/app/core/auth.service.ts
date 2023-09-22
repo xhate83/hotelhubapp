@@ -17,10 +17,9 @@ export class AuthService {
   }
   
   
-  public login(user: IUser): Observable<any> {
-
+  public login(user: IUser): Observable<IUser> {
     this._setSession({token: 'token_quemado'}, user)
-    return of(true)
+    return of(user)
   }
 
   public logout(): Observable<any> {

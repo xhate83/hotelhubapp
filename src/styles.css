@@ -8,6 +8,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 50px !important;
 }
 
+.mat-icon-md-custom {
+    font-size: 35px !important; 
+    width: 35px !important;
+    height: 35px !important;
+}
+
+.mat-icon-sm-custom {
+    font-size: 20px !important; 
+    width: 20px !important;
+    height: 20px !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

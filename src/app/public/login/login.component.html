@@ -1,11 +1,12 @@
 <section class="relative bg-gray-50 dark:bg-gray-900 bg-cover min-h-screen bg-center md:h-screen" style="background-image: url('assets/images/swimming-pool.jpg');">
-    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="absolute inset-0 dark:bg-black opacity-50"></div>
+    <app-mode-app size="lg" class="z-10 absolute top-5 right-5"></app-mode-app>
     <div class="relative flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div  class="flex items-center mb-6">
-            <img class="w-32 h-32" src="assets/images/hotel-logo.svg" alt="logo">
+        <div  class="w-32 h-32 flex items-center mb-6 rounded-full border-4 dark:border-gray-900">
+            <img class="rounded-full" src="assets/images/hotel-logo.svg" alt="logo">
         </div>
-        <div class="w-full bg-white dark:bg-gray-900 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <div appBlurCard class="w-full md:mt-0 sm:max-w-md">
+            <div class="space-y-4 md:space-y-6">
                 <h1 class="text-2xl text-center font-bold text-gray-900 dark:text-gray-50 md:text-4xl">
                     Bienvenid@ a <span class="font-extrabold">Hotel Hub</span>
                 </h1>
@@ -37,7 +38,7 @@
 
                     <mat-form-field class="w-full">
                         <mat-label>Tipo de usuario</mat-label>
-                        <mat-select formControlName="userType" required >
+                        <mat-select formControlName="type" required >
                           <mat-option *ngFor="let type of userTypes" [value]="type">
                             {{type.value}}
                           </mat-option>
@@ -47,7 +48,7 @@
                 </form>
 
                 <div class="flex flex-row justify-center">
-                    <button (click)="onSubmit()" mat-flat-button color="primary" type="button">Ingresar</button>
+                    <button (click)="onSubmit()" mat-raised-button color="primary" type="button">Ingresar</button>
                 </div>
             </div>
         </div>

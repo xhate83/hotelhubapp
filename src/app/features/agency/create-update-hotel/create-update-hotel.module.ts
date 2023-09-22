@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
-import { LoginComponent } from './login.component';
+import { CreateUpdateHotelComponent } from './create-update-hotel.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule} from '@angular/material/form-field';
@@ -14,14 +14,18 @@ import { ModeAppComponent } from 'src/app/shared/mode-app/mode-app.component';
 const routes: Route[] = [
   {
     path: '',
-    component: LoginComponent
-  }
+    component: CreateUpdateHotelComponent
+  },
+  {
+    path: ':id',
+    component: CreateUpdateHotelComponent
+  },
 ]
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    CreateUpdateHotelComponent
   ],
   imports: [
     CommonModule,
@@ -37,4 +41,4 @@ const routes: Route[] = [
     SharedModule
   ]
 })
-export class LoginModule { }
+export class CreateUpdateHotelModule { }

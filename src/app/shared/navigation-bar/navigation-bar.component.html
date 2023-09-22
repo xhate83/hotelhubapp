@@ -1,0 +1,91 @@
+<div class="items-center border-gray-900 dark:border-gray-50 border-b-4 sm:border-b-0 sm:border-r-4 flex flex-row sm:flex-col sm:min-h-screen sm:h-screen justify-between sm:justify-start bg-cyan-900 dark:bg-gray-900 p-2 sm:p-4">
+    
+    
+    <div class="hidden sm:flex flex-col items-center space-y-3">
+        <div class="w-24 h-24 rounded-full items-center justify-center border-4 dark:border-gray-700">
+            <img class="w-full h-full rounded-full" src="assets/images/hotel-logo.svg" alt="logo">
+        </div>
+
+        <div class="text-gray-50 text-2xl">
+            Hotel Hub
+         </div>
+    </div>
+    
+
+    <!-- Para botones en pantallas pequeñas horizontal-->
+    <div class="sm:hidden flex flex-col items-center space-y-4">
+        <div class="text-gray-900 dark:text-gray-50 text-2xl">
+           Hotel Hub
+        </div>
+        <div class="flex flex-row space-x-2">
+            <button mat-mini-fab color="primary" (click)="goToHotels()">
+                <mat-icon>location_city</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" (click)="goToRooms()" *ngIf="this.user?.type?.id === 'agency'">
+                <mat-icon>hotel</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary"  (click)="goToReservations()">
+                <mat-icon>local_play</mat-icon>
+            </button>
+            <button
+                color="primary"
+                mat-mini-fab
+                [matMenuTriggerFor]="userActions">
+                <mat-icon>person</mat-icon>
+            </button>
+        </div>
+    </div>
+    
+
+    <!-- Para botones en pantallas grandes vertical -->
+    <div class="hidden sm:flex flex-col space-y-4 my-12">
+        
+        <button mat-raised-button color="primary" (click)="goToHotels()">
+            <mat-icon class="mr-2">location_city</mat-icon>
+            <span>Hoteles</span>
+        </button>
+        <button mat-raised-button color="primary" (click)="goToRooms()" *ngIf="this.user?.type?.id === 'agency'">
+            <mat-icon class="mr-2">hotel</mat-icon>
+            <span>Habitaciones</span>
+        </button>
+        <button mat-raised-button color="primary"  (click)="goToReservations()">
+            <mat-icon class="mr-2">local_play</mat-icon>
+            <span>Reservas</span>
+        </button>
+        <button
+            mat-raised-button
+            color="primary"
+            [matMenuTriggerFor]="userActions">
+            <mat-icon class="mr-2">person</mat-icon>
+            <span>Usuario</span>
+        </button>
+    </div>
+
+
+    <footer class="flex items-center justify-center flex-col space-y-2 sm:space-y-5">
+
+       <app-mode-app size="md"></app-mode-app>
+
+       <div class="flex text-gray-50 flex-col items-center justify-center text-sm">
+        <div>Hecho con el ❤️</div>
+        <div>Jeyson Julian Ospina</div>
+       </div>
+    </footer>
+
+</div>
+
+
+<mat-menu
+    [xPosition]="'after'"
+    #userActions="matMenu">
+    <button
+        (click)="logOut()"
+        mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Salir</span>
+    </button>
+    <mat-divider class="my-4"></mat-divider>
+    <div class="p-2 text-sm">{{user?.email}}</div>
+
+   
+</mat-menu>

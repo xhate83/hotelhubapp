@@ -5,8 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DatePipe, registerLocaleData  } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 import localeEsCo from '@angular/common/locales/es-CO';
 
 registerLocaleData(localeEsCo, 'es-CO');
@@ -21,7 +21,7 @@ registerLocaleData(localeEsCo, 'es-CO');
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    SharedModule
   ],
   providers: [DatePipe, { provide: LOCALE_ID, useValue: 'es-CO' }],
   bootstrap: [AppComponent]

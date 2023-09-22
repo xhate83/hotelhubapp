@@ -1,0 +1,17 @@
+<button (click)="toggleLight()" 
+        class="shadow-lg rounded-lg p-1 transition-colors duration-300 ease-in-out bg-opacity-50 border-2"
+        [ngClass]="{
+            'border-yellow-50': lightOn, 
+            'bg-gray-900 border-gray-700': !lightOn
+        }">
+    <mat-icon class="transition-colors ease-in-out duration-300" 
+              [ngClass]="{
+                  'text-yellow-400': lightOn, 
+                  'text-gray-400': !lightOn,
+                  'mat-icon-lg-custom': size === 'lg',
+                  'mat-icon-md-custom': size === 'md',
+                  'mat-icon-sm-custom': size === 'sm'
+              }">
+        {{lightOn ? 'lightbulb' : 'highlight'}}
+    </mat-icon>
+</button>

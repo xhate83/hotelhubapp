@@ -1,18 +1,18 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil, finalize  } from 'rxjs';
-import { SnackBarService } from '../../shared/utilities/snack-bak.service';
-import { IUser } from '../../models/user.model';
-import { AuthService } from '../../core/auth.service';
+import { SnackBarService } from '../../../shared/utilities/snack-bak.service';
+import { IUser } from '../../../models/user.model';
+import { AuthService } from '../../../core/auth.service';
 import { Router } from '@angular/router';
-import { USER_TYPES } from '../../core/master-data';
+import { USER_TYPES } from '../../../core/master-data';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html'
+  selector: 'app-create-update-hotel',
+  templateUrl: './create-update-hotel.component.html'
 })
-export class LoginComponent implements OnDestroy {
+export class CreateUpdateHotelComponent implements OnDestroy {
 
   private _router = inject(Router);
   private _formBuilder = inject(FormBuilder);
@@ -23,7 +23,7 @@ export class LoginComponent implements OnDestroy {
   loginForm: FormGroup = this._formBuilder.group({
     email: [null, [Validators.required, Validators.email]],
     password: [null, Validators.required],
-    type: [{}, Validators.required]
+    userType: [{}, Validators.required]
   });
 
 
@@ -39,21 +39,16 @@ export class LoginComponent implements OnDestroy {
     const user: IUser = {
       ...this.loginForm.value,
     }
-    this.loginForm.disable();
     this._authService.login(user).pipe(
       takeUntil(this._unsubscribeAll),
       finalize(() => {
         this.loginForm.enable();
       }))
     .subscribe({
-      next: (user: IUser) => {
+      next: () => {
         this._snackBarService.openSnackBar('Ingreso satisfactorio', '✅');
         this.loginForm.disable();
-        if(user.type.id === 'agency') {
-          this._router.navigate(['/agency']);
-        } else if (user.type.id === 'client') {
-          this._router.navigate(['/client']);
-        }
+        this._router.navigate(['/']);
       },
       error: () => {this._snackBarService.openSnackBar('No se pudo ingresar', '⛔')}
     })
