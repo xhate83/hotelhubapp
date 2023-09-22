@@ -1,0 +1,55 @@
+<section class="relative bg-gray-50 dark:bg-gray-900 bg-cover min-h-screen bg-center md:h-screen" style="background-image: url('assets/images/swimming-pool.jpg');">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div  class="flex items-center mb-6">
+            <img class="w-32 h-32" src="assets/images/hotel-logo.svg" alt="logo">
+        </div>
+        <div class="w-full bg-white dark:bg-gray-900 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1 class="text-2xl text-center font-bold text-gray-900 dark:text-gray-50 md:text-4xl">
+                    Bienvenid@ a <span class="font-extrabold">Hotel Hub</span>
+                </h1>
+                <form class="space-y-4 md:space-y-6" [formGroup]="loginForm">
+                    <mat-form-field class="w-full">
+                        <mat-label>Correo electrónico</mat-label>
+                        <input type="email"  formControlName="email" matInput required>
+                        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+                            Correo invalido
+                        </mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field class="w-full">
+                        <mat-label>Contraseña</mat-label>
+                        <input type="password" formControlName="password" matInput #passwordField>
+                        <button
+                            mat-icon-button
+                            type="button"
+                            (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
+                            matSuffix>
+                            <mat-icon
+                                class="icon-size-5"
+                                *ngIf="passwordField.type === 'password'">lock</mat-icon>
+                            <mat-icon
+                                class="icon-size-5"
+                                *ngIf="passwordField.type === 'text'">lock_open</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-full">
+                        <mat-label>Tipo de usuario</mat-label>
+                        <mat-select formControlName="userType" required >
+                          <mat-option *ngFor="let type of userTypes" [value]="type">
+                            {{type.value}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                   
+                </form>
+
+                <div class="flex flex-row justify-center">
+                    <button (click)="onSubmit()" mat-flat-button color="primary" type="button">Ingresar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
