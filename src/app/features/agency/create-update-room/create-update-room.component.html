@@ -1,0 +1,112 @@
+<div appBlurCard>
+    <app-header-feature [title]="textTitle" icon="hotel"></app-header-feature>
+
+    <div class="mt-8">
+
+        <form class="flex flex-col" [formGroup]="roomForm">
+            <div class="flex flex-col space-y-2">
+
+                <div class="flex flex-col sm:items-center sm:flex-row w-full space-y-2 sm:space-x-4 sm:space-y-0">
+
+                    <mat-form-field class="w-full">
+                        <mat-label>Hotel</mat-label>
+                        <mat-select formControlName="hotelId" required >
+                          <mat-option *ngFor="let hotel of hotels" [value]="hotel.id">
+                            {{hotel.name}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="roomForm.get('hotelId')?.hasError('required')">
+                            Hotel requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-full">
+                        <mat-label>Tipo</mat-label>
+                        <mat-select formControlName="type" required >
+                          <mat-option *ngFor="let type of roomTypes" [value]="type">
+                            {{type.value}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="roomForm.get('type')?.hasError('required')">
+                            Tipo requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                
+                <mat-form-field class="w-full">
+                    <mat-label>Descripción</mat-label>
+                    <textarea type="text"  formControlName="description" matInput required></textarea>
+                    <mat-error *ngIf="roomForm.get('description')?.hasError('minlength')">
+                        Mínimo 3 caracteres
+                    </mat-error>
+                    <mat-error *ngIf="roomForm.get('description')?.hasError('required')">
+                        Descripción requerida
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="flex flex-col sm:items-center sm:flex-row w-full space-y-2 sm:space-x-4 sm:space-y-0">
+                    <mat-form-field class="w-full">
+                        <mat-label>Costo</mat-label>
+                        <input type="number"  formControlName="cost" matInput required>
+                        <mat-error *ngIf="roomForm.get('cost')?.hasError('min')">
+                            Mínimo 0 
+                        </mat-error>
+                        <mat-error *ngIf="roomForm.get('cost')?.hasError('required')">
+                            Costo requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-full">
+                        <mat-label>Ubicación</mat-label>
+                        <mat-select formControlName="ubication" required >
+                          <mat-option *ngFor="let city of roomCities" [value]="city">
+                            {{city.value}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="roomForm.get('ubication')?.hasError('required')">
+                            Ubicación requerida
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="flex flex-col sm:items-center sm:flex-row w-full space-y-2 sm:space-x-4 sm:space-y-0">
+                    <mat-form-field class="w-full">
+                        <mat-label>Impuestos</mat-label>
+                        <mat-select formControlName="taxes" required multiple>
+                          <mat-option *ngFor="let tax of roomTaxes" [value]="tax">
+                            {{tax.value}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="roomForm.get('taxes')?.hasError('required')">
+                            Mínimo un impuesto
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-full">
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="state" required>
+                          <mat-option *ngFor="let state of roomStates" [value]="state">
+                            {{state.value}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="roomForm.get('state')?.hasError('required')">
+                            Estado requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+            </div>
+
+            <div class="flex flex-row justify-center">
+                <button (click)="onSubmit()" mat-raised-button color="primary" type="button">{{textButton}}</button>
+            </div>
+
+        </form>
+
+    </div>
+    
+</div>

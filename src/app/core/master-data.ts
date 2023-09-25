@@ -1,4 +1,5 @@
 import { ICity } from "../models/city.model";
+import { IHotel } from "../models/hotel.model";
 import { IDocumentType, IGender } from "../models/reservation.model";
 import { IRoomType } from "../models/room.model";
 import { IState } from "../models/state.model";
@@ -50,22 +51,7 @@ export const ROOM_TYPES: IRoomType[] = [
     }
 ]
 
-export const ROOM_STATES: IState[] = [
-    {
-        id: 'available',
-        value: 'Disponible'
-    },
-    {
-        id: 'unavailable',
-        value: 'No Disponible'
-    },
-    {
-        id: 'reserved',
-        value: 'Reservado'
-    }
-]
-
-export const HOTEL_STATES: IState[] = [
+export const STATES: IState[] = [
     {
         id: 'available',
         value: 'Disponible'
@@ -86,7 +72,7 @@ export const TAXES: ITax[] = [
     {
         id: 2,
         value: 'ICA',
-        description: 'Impuesto de yndustria y comercio',
+        description: 'Impuesto de Industria y comercio',
         percentage: 0.30
     },
     {
@@ -125,4 +111,8 @@ export const DOCUMENT_TYPES: IDocumentType[] = [
         id: 3,
         value: 'Pasaporte'
     }
+]
+
+export const INITIAL_DATA: IHotel[] = [
+    
 ]

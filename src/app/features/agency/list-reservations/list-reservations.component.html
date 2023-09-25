@@ -1,0 +1,53 @@
+<div appBlurCard>
+    <app-header-feature title="Mis Reservas" icon="local_play"></app-header-feature>
+
+    <div class="mt-8">
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4" [ngClass]="{'sm:grid-cols-1' : reservations.length <= 0}">
+
+            <ng-container *ngFor="let reservation of reservations">
+                <div appGridCard>
+
+                    <div class="flex flex-col w-full space-y-2">
+                        <div class="text-sm border-b-2">
+                            ID: {{reservation.id}}
+                        </div>
+                        <div class="text-sm border-b-2">
+                            Hotel: {{reservation.hotel?.name}}
+                        </div>
+                        <div class="text-sm border-b-2">
+                            Habitación: {{reservation.room?.id}}
+                        </div>
+                        <div class="text-sm border-b-2">
+                            Cliente: {{reservation.createdBy}}
+                        </div>
+                        <div class="text-sm border-b-2">
+                            Total: {{reservation.totalPrice}}
+                        </div>
+                        <div class="text-sm">
+                            Ubicación: {{reservation.room?.ubication?.value}}
+                        </div>
+                    </div>
+                    
+                    <div class="w-full flex flex-row items-center justify-center">
+                        <button mat-raised-button color="primary" (click)="openReservationDetail(reservation)">
+                            Detalle
+                        </button>
+                    </div>
+    
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="reservations.length <= 0">
+                <div appGridCard>
+                    <div class="text-4xl text-white">
+                        Aún no tienes reservas
+                    </div>
+                </div>
+            </ng-container>
+           
+        </div>
+
+    </div>
+    
+</div>

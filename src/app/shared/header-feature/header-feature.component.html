@@ -1,0 +1,14 @@
+<div class="flex items-center flex-row dark:bg-gray-900 bg-cyan-700 p-4 rounded-lg sm:space-x-5">
+
+    <div *ngIf="icon" class="hidden sm:flex">
+        <mat-icon class="text-gray-50 mat-icon-lg-custom">
+            {{icon}}
+        </mat-icon>
+    </div>
+    
+
+    <div class="text-xl sm:text-3xl font-bold text-gray-50">
+        {{title}}
+    </div>
+
+</div>

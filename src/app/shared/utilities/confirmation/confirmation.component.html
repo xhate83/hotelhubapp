@@ -1,0 +1,18 @@
+
+<mat-dialog-content class="mat-typography bg-cyan-700 dark:bg-gray-700">
+    <div class="flex flex-col items-center space-y-4">
+
+        <mat-icon class="h-auto w-auto mat-icon-lg-custom text-gray-50 dark:text-cyan-600">info</mat-icon>
+
+        <div class="text-center text-md sm:text-xl text-gray-50 dark:text-gray-50 ">
+            {{text}}
+        </div>
+
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="center" class="bg-cyan-700 dark:bg-gray-700">
+    <button mat-raised-button color="warn" (click)="dialogRef.close(true)">Si</button>
+    <button mat-raised-button color="primary" (click)="dialogRef.close(false)">No</button>
+</mat-dialog-actions>

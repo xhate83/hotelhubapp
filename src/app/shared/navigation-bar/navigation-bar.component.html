@@ -1,23 +1,25 @@
-<div class="items-center border-gray-900 dark:border-gray-50 border-b-4 sm:border-b-0 sm:border-r-4 flex flex-row sm:flex-col sm:min-h-screen sm:h-screen justify-between sm:justify-start bg-cyan-900 dark:bg-gray-900 p-2 sm:p-4">
+<div class="items-center sm:max-w-xs border-gray-900 dark:border-gray-50 border-b-4 sm:border-b-0 sm:border-r-4 flex flex-row sm:flex-col sm:min-h-screen sm:h-screen justify-between sm:justify-start bg-cyan-900 dark:bg-gray-900 p-2 sm:p-4">
     
     
-    <div class="hidden sm:flex flex-col items-center space-y-3">
+    <div class="hidden sm:flex flex-col items-center">
         <div class="w-24 h-24 rounded-full items-center justify-center border-4 dark:border-gray-700">
             <img class="w-full h-full rounded-full" src="assets/images/hotel-logo.svg" alt="logo">
         </div>
 
-        <div class="text-gray-50 text-2xl">
+        <div class="text-gray-50 text-2xl mt-2 mb-4">
             Hotel Hub
          </div>
+         <div class="text-sm text-gray-50">{{user?.type?.value}}</div>
+         <div class="text-xs text-gray-50">{{user?.email}}.com</div>
     </div>
     
 
     <!-- Para botones en pantallas pequeñas horizontal-->
-    <div class="sm:hidden flex flex-col items-center space-y-4">
-        <div class="text-gray-900 dark:text-gray-50 text-2xl">
+    <div class="sm:hidden flex flex-col items-center">
+        <div class="text-gray-50 text-2xl">
            Hotel Hub
         </div>
-        <div class="flex flex-row space-x-2">
+        <div class="flex flex-row space-x-2 my-2">
             <button mat-mini-fab color="primary" (click)="goToHotels()">
                 <mat-icon>location_city</mat-icon>
             </button>
@@ -30,10 +32,12 @@
             <button
                 color="primary"
                 mat-mini-fab
-                [matMenuTriggerFor]="userActions">
-                <mat-icon>person</mat-icon>
+                (click)="logOut()">
+                <mat-icon>exit_to_app</mat-icon>
             </button>
         </div>
+        <div class="text-sm text-gray-50">{{user?.type?.value}}</div>
+         <div class="text-xs text-gray-50">{{user?.email}}.com</div>
     </div>
     
 
@@ -55,9 +59,9 @@
         <button
             mat-raised-button
             color="primary"
-            [matMenuTriggerFor]="userActions">
-            <mat-icon class="mr-2">person</mat-icon>
-            <span>Usuario</span>
+            (click)="logOut()">
+            <mat-icon class="mr-2">exit_to_app</mat-icon>
+            <span>Salir</span>
         </button>
     </div>
 
@@ -73,19 +77,3 @@
     </footer>
 
 </div>
-
-
-<mat-menu
-    [xPosition]="'after'"
-    #userActions="matMenu">
-    <button
-        (click)="logOut()"
-        mat-menu-item>
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Salir</span>
-    </button>
-    <mat-divider class="my-4"></mat-divider>
-    <div class="p-2 text-sm">{{user?.email}}</div>
-
-   
-</mat-menu>

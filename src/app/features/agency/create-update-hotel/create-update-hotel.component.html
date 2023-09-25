@@ -1,6 +1,42 @@
 <div appBlurCard>
-    <div class="dark:text-gray-50">
-        It works!
+    <app-header-feature [title]="textTitle" icon="location_city"></app-header-feature>
+
+    <div class="mt-8">
+
+        <form class="flex flex-col" [formGroup]="hotelForm">
+            <div class="flex flex-col space-y-2">
+
+                <mat-form-field class="w-full">
+                    <mat-label>Nombre</mat-label>
+                    <input type="text"  formControlName="name" matInput required>
+                    <mat-error *ngIf="hotelForm.get('name')?.hasError('minlength')">
+                        Mínimo 3 caracteres
+                    </mat-error>
+                    <mat-error *ngIf="hotelForm.get('name')?.hasError('required')">
+                        Nombre requerido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-full">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="state" required >
+                      <mat-option *ngFor="let state of hotelStates" [value]="state">
+                        {{state.value}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="hotelForm.get('state')?.hasError('required')">
+                        Estado requerido
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+            <div class="flex flex-row justify-center">
+                <button (click)="onSubmit()" mat-raised-button color="primary" type="button">{{textButton}}</button>
+            </div>
+
+        </form>
+
     </div>
     
 </div>
