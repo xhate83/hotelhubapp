@@ -47,23 +47,24 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   }
 
   goToHotels(): void {
-    if(this.user?.type.id === 'agency') {
-      this._router.navigate(['/agency/list-hotels']);
-    } else if(this.user?.type.id === 'client') {
-      this._router.navigate(['/client/list-hotels']);
-    }
+    this._router.navigate(['/agency/list-hotels']);
   }
 
   goToReservations(): void {
     if(this.user?.type.id === 'agency') {
       this._router.navigate(['/agency/list-reservations']);
-    } else if(this.user?.type.id === 'client') {
-      this._router.navigate(['/client/list-reservations']);
+    } else if(this.user?.type.id === 'customer') {
+      this._router.navigate(['/customer/list-reservations']);
     }
   }
 
   goToRooms(): void {
-    this._router.navigate(['/agency/list-rooms']);
+    if(this.user?.type.id === 'agency') {
+      this._router.navigate(['/agency/list-rooms']);
+    } else if(this.user?.type.id === 'customer') {
+      this._router.navigate(['/customer/create-reservation']);
+    }
+
   }
 
   logOut(): void{ 

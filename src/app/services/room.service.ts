@@ -92,12 +92,18 @@ export class RoomService {
                 hotel.rooms?.some(room => room.id === updatedRoom.id)
             );
 
-            if (existingHotel) {
+            if (existingHotel?.rooms) {
                 const existingRoomIndex = existingHotel.rooms.findIndex(room => room.id === updatedRoom.id);
                 if (existingHotel.id !== hotelId) {
                     existingHotel.rooms.splice(existingRoomIndex, 1);
                     const targetHotel = data.find(hotel => hotel.id === hotelId);
-                    targetHotel?.rooms?.push(updatedRoom) ?? (targetHotel!.rooms = [updatedRoom]);
+                    if (targetHotel) {
+                        if (targetHotel.rooms) {
+                            targetHotel.rooms.push(updatedRoom);
+                        } else {
+                            targetHotel.rooms = [updatedRoom];
+                        }
+                    }
                 } else {
                     existingHotel.rooms[existingRoomIndex] = updatedRoom;
                 }

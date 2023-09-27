@@ -27,11 +27,11 @@ export const CITIES: ICity[] = [
         value: 'Bogotá'
     },
     {
-        id: 2,
+        id: 3,
         value: 'Medellin'
     },
     {
-        id: 2,
+        id: 4,
         value: 'Cartagena'
     }
 ]
@@ -46,7 +46,7 @@ export const ROOM_TYPES: IRoomType[] = [
         value: 'Junior suite'
     },
     {
-        id: 'gran Suite',
+        id: 'granSuite',
         value: 'Gran suite'
     }
 ]

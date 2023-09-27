@@ -5,10 +5,10 @@ import { ITax } from "./tax.model";
 export interface IReservation {
     id: number;
     createdBy: string;
-    dateStart: string;
-    dateEnd: string;
+    dateStart: Date | string;
+    dateEnd: Date | string;
     guest: IReservationGuest[];
-    emergecyContact: IEmergencyContact;
+    emergencyContact: IEmergencyContact;
     hotelId: number;
     roomId: number;
     hotel?: IHotel;
@@ -19,12 +19,12 @@ export interface IReservation {
 
 export interface IReservationGuest {
     fullName: string;
-    birthDay: string;
+    birthDate: Date | string;
     gender: IGender;
     documentType: IDocumentType;
     documentNumber: string;
     email: string;
-    cellphone: string;
+    phoneNumber: string;
 }
 
 export interface IEmergencyContact {

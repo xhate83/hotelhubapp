@@ -9,10 +9,10 @@ import { ReservationDetailComponent } from '../../shared/reservation-detail/rese
 
 
 @Component({
-  selector: 'app-list-reservations',
-  templateUrl: './list-reservations.component.html',
+  selector: 'app-reservations',
+  templateUrl: './reservations.component.html',
 })
-export class ListReservationsComponent implements OnDestroy, OnInit {
+export class ReservationsComponent implements OnDestroy, OnInit {
 
   private _matDialog: MatDialog = inject(MatDialog);
   private _reservatioService = inject(ReservationService);
@@ -35,10 +35,10 @@ export class ListReservationsComponent implements OnDestroy, OnInit {
           const hotel = this.hotels.find(hotel => hotel.id === reservation.hotelId) ?? null;
           if (hotel) {
             reservation.hotel = hotel;
-    
             const room = hotel.rooms?.find(room => room.id === reservation.roomId) ?? null;
             if (room) {
               reservation.room = room;
+              reservation.room.reservations = [];
             }
           }
           return reservation;
@@ -52,7 +52,6 @@ export class ListReservationsComponent implements OnDestroy, OnInit {
           }
           return 0;
         });
-
         this.reservations.map(reservation => { 
           if(reservation.hotel) {
             reservation.hotel.rooms = []}

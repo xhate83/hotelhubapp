@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, mergeMap, of, tap } from 'rxjs';
 import { IHotel } from '../models/hotel.model';
+import { IRoom } from '../models/room.model';
 import { DataBaseService } from '../core/data-base.service';
 import { AuthService } from '../core/auth.service';
 import { IReservation } from '../models/reservation.model';
@@ -37,9 +38,8 @@ export class ReservationService {
                 return this._dataBaseService.setData(data).pipe(
                     map(() => {
                         const allReservations = data
-                            .filter(hotel => hotel.createdBy === this._authService.getUser()?.email)
-                            .flatMap(hotel => hotel.rooms)
-                            .flatMap(room => room.reservations || []);
+                            .flatMap(hotel => hotel.rooms ?? [])
+                            .flatMap(room => room.reservations ?? []);
 
                         this._reservations.next(allReservations);
                         return true;
@@ -66,7 +66,7 @@ export class ReservationService {
       map((hotels: IHotel[]) => {
         const filteredHotels = hotels.filter(hotel => hotel.createdBy === this._authService.getUser()?.email);
         return filteredHotels.flatMap(hotel => 
-            hotel.rooms.flatMap(room => room.reservations ?? [])
+            hotel.rooms?.flatMap(room => room.reservations ?? []) ?? []
         );
       }),
       tap((reservations: IReservation[]) => {
@@ -79,13 +79,13 @@ export class ReservationService {
     );
   }
 
-  public getReservationsByClient(): Observable<IReservation[]> {
+  public getReservationsByCustomer(): Observable<IReservation[]> {
     return this._dataBaseService.getData().pipe(
       map((hotels: IHotel[]) => {
         return hotels.flatMap(hotel => 
-            hotel.rooms.flatMap(room => 
+            hotel.rooms?.flatMap(room => 
                 (room.reservations ?? []).filter(reservation => reservation.createdBy === this._authService.getUser()?.email)
-            )
+            ) ?? []
         );
       }),
       tap((reservations: IReservation[]) => {
@@ -96,6 +96,42 @@ export class ReservationService {
         return of([]);
       })
     );
-  } 
-  
 }
+
+  public getAvailableRoomsByUbications(ubicationsIds: number[]): Observable<IRoom[]> {
+    return this._dataBaseService.getData().pipe(
+        map((hotels: IHotel[]) => {
+            const availableHotels = hotels.filter(hotel => hotel.state.id === 'available');
+            const rooms = availableHotels.flatMap(hotel => {
+                if (!hotel.rooms) {
+                    return [];
+                }
+                const filteredRooms = hotel.rooms.filter(room => ubicationsIds.includes(room.ubication.id) && room.state.id === 'available');
+                
+                filteredRooms.forEach(room => {
+                    const { rooms, ...hotelWithoutRooms } = hotel;
+                    room.hotel = hotelWithoutRooms;
+                });
+                
+                return filteredRooms;
+            });
+            return rooms;
+        })
+    );
+  }
+
+public getAllReservations(): Observable<IReservation[]> {
+  return this._dataBaseService.getData().pipe(
+    map((hotels: IHotel[]) => {
+      const allReservations = hotels.flatMap(hotel => {
+        if (!hotel.rooms) {
+          return [];
+        }
+        return hotel.rooms.flatMap(room => room.reservations ?? []);
+      });
+      this._reservations.next(allReservations);
+      return allReservations;
+    })
+    );
+  } 
+} 

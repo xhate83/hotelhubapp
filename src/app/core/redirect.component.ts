@@ -44,8 +44,8 @@ export class UserRedirectComponent implements OnInit, OnDestroy {
             const userType = this._authService.getUser()?.type.id;
             if (userType === 'agency') {
                 this._router.navigate(['/agency']);
-            } else if (userType === 'client') {
-               this._router.navigate(['/client']);
+            } else if (userType === 'customer') {
+               this._router.navigate(['/customer']);
             }
         });
     }

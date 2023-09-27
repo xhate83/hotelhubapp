@@ -6,7 +6,7 @@ export interface IHotel {
     name: string;
     createdBy: string;
     state: IState;
-    rooms: IRoom[];
+    rooms?: IRoom[];
     
 }
 

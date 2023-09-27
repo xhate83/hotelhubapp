@@ -51,8 +51,8 @@ export class LoginComponent implements OnDestroy {
         this.loginForm.disable();
         if(user.type.id === 'agency') {
           this._router.navigate(['/agency']);
-        } else if (user.type.id === 'client') {
-          this._router.navigate(['/client']);
+        } else if (user.type.id === 'customer') {
+          this._router.navigate(['/customer']);
         }
       },
       error: () => {this._snackBarService.openSnackBar('No se pudo ingresar', '⛔')}

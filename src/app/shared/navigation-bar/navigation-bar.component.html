@@ -10,7 +10,7 @@
             Hotel Hub
          </div>
          <div class="text-sm text-gray-50">{{user?.type?.value}}</div>
-         <div class="text-xs text-gray-50">{{user?.email}}.com</div>
+         <div class="text-xs text-gray-50">{{user?.email}}</div>
     </div>
     
 
@@ -20,10 +20,10 @@
            Hotel Hub
         </div>
         <div class="flex flex-row space-x-2 my-2">
-            <button mat-mini-fab color="primary" (click)="goToHotels()">
+            <button mat-mini-fab color="primary" (click)="goToHotels()" *ngIf="this.user?.type?.id === 'agency'">
                 <mat-icon>location_city</mat-icon>
             </button>
-            <button mat-mini-fab color="primary" (click)="goToRooms()" *ngIf="this.user?.type?.id === 'agency'">
+            <button mat-mini-fab color="primary" (click)="goToRooms()">
                 <mat-icon>hotel</mat-icon>
             </button>
             <button mat-mini-fab color="primary"  (click)="goToReservations()">
@@ -37,18 +37,18 @@
             </button>
         </div>
         <div class="text-sm text-gray-50">{{user?.type?.value}}</div>
-         <div class="text-xs text-gray-50">{{user?.email}}.com</div>
+         <div class="text-xs text-gray-50">{{user?.email}}</div>
     </div>
     
 
     <!-- Para botones en pantallas grandes vertical -->
     <div class="hidden sm:flex flex-col space-y-4 my-12">
         
-        <button mat-raised-button color="primary" (click)="goToHotels()">
+        <button mat-raised-button color="primary" (click)="goToHotels()"*ngIf="this.user?.type?.id === 'agency'">
             <mat-icon class="mr-2">location_city</mat-icon>
             <span>Hoteles</span>
         </button>
-        <button mat-raised-button color="primary" (click)="goToRooms()" *ngIf="this.user?.type?.id === 'agency'">
+        <button mat-raised-button color="primary" (click)="goToRooms()">
             <mat-icon class="mr-2">hotel</mat-icon>
             <span>Habitaciones</span>
         </button>

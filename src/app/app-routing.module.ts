@@ -54,25 +54,24 @@ const routes: Routes = [
   },
 
   {
-    path: 'client',
+    path: 'customer',
     canActivate: [authenticationGuard(), userTypeGuard()],
     component: LayoutComponent,
-    data: { userType: 'client' },
+    data: { userType: 'customer' },
     children: [
-      // {
-      //   path: '',
-      //   pathMatch: 'full',
-      //   redirectTo: 'list-hotels' 
-      // },
-      // {
-      //   path: 'list-hotels'
-      // },
-      // {
-      //   path: 'create-reservation',
-      // },
-      // {
-      //   path: 'reservations',
-      // }
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'create-reservation' 
+      },
+      {
+        path: 'create-reservation',
+        loadChildren: () => import('./features/customer/create-reservation/create-reservation.module').then(m => m.CreateReservationModule)
+      },
+      {
+        path: 'list-reservations',
+        loadChildren: () => import('./features/customer/reservations/reservations.module').then(m => m.ReservationsModule)
+      }
     ]
   },
   {

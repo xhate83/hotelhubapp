@@ -1,0 +1,63 @@
+<form class="flex flex-col" [formGroup]="filterForm">
+    <div class="flex flex-col space-y-2">
+
+        <div class="flex flex-col sm:items-center sm:flex-row w-full space-y-2 sm:space-x-4 sm:space-y-0">
+
+            <mat-form-field class="w-full">
+                <mat-label>Fecha entrada</mat-label>
+                <input [matDatepicker]="pickerDateStart" formControlName="dateStart" matInput [min]="minDate" [max]="filterForm.get('dateEnd')?.value" required>
+                <mat-datepicker  #pickerDateStart></mat-datepicker>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerDateStart">
+                </mat-datepicker-toggle>
+                <mat-hint class="dark:text-white">DD-MM-YYYY</mat-hint>
+                <mat-error *ngIf="filterForm.get('dateStart')?.hasError('required')">
+                    Fecha inicio requerida
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-full">
+                <mat-label>Fecha salida</mat-label>
+                <input [matDatepicker]="pickerDateEnd" formControlName="dateEnd" matInput [min]="filterForm.get('dateStart')?.value" required>
+                <mat-datepicker  #pickerDateEnd></mat-datepicker>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerDateEnd">
+                </mat-datepicker-toggle>
+                <mat-hint class="dark:text-white">DD-MM-YYYY</mat-hint>
+                <mat-error *ngIf="filterForm.get('dateStart')?.hasError('required')">
+                    Fecha fin requerida
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+        <div class="flex flex-col sm:items-center sm:flex-row w-full space-y-2 sm:space-x-4 sm:space-y-0">
+
+            <mat-form-field class="w-full">
+                <mat-label>Cantidad de húespedes</mat-label>
+                <input type="number"  formControlName="countGuest" matInput required>
+                <mat-error *ngIf="filterForm.get('countGuest')?.hasError('min')">
+                    Mínimo 1 
+                </mat-error>
+                <mat-error *ngIf="filterForm.get('countGuest')?.hasError('required')">
+                    Cantidad requerida
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-full">
+                <mat-label>Ubicación</mat-label>
+                <mat-select formControlName="ubicationIds" required multiple>
+                  <mat-option *ngFor="let city of roomCities" [value]="city.id">
+                    {{city.value}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="filterForm.get('ubicationIds')?.hasError('required')">
+                    Ubicación requerida
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+
+    </div>
+    <div class="flex flex-row justify-center space-x-2">
+        <button (click)="onSubmit()" mat-raised-button color="primary" type="button">Filtrar</button>
+        <button (click)="clearFormFilter()" mat-raised-button color="primary" type="button">Limpiar</button>
+    </div>
+</form>

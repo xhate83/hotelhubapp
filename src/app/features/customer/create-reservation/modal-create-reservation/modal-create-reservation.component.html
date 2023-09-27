@@ -1,0 +1,296 @@
+
+<div  class="w-fill bg-cyan-700 dark:bg-gray-700 p-2 sm:p-4 relative">
+
+    <div class="absolute top-2 right-2">
+        <button mat-icon-button (click)="dialogRef.close(false)" class="">
+            <mat-icon class="text-gray-50">close</mat-icon>
+        </button>
+    </div>
+    
+
+    <div class="flex flex-col items-center space-y-4">
+
+        <mat-icon class="h-auto w-auto mat-icon-lg-custom text-gray-50 dark:text-cyan-600">local_play</mat-icon>
+        <div class="text-white text-2xl mb-2">
+            Estas reservando en {{data.room.hotel?.name}}
+        </div>
+
+        <form class="flex flex-col w-full" [formGroup]="reservationForm">
+
+            <mat-horizontal-stepper class="rounded "
+                [linear]="true"
+                [disableRipple]="true"
+                [labelPosition]="'bottom'"
+                #horizontalStepper>
+
+                <mat-step [formGroupName]="'emergencyContact'"
+                    [stepControl]="reservationForm.get('emergencyContact')!"
+                    #horizontalStepperStep1
+                    [label]="'Contácto'">
+
+                    <div class="sm:p-4 border-cyan-900 border-1 sm:border-4 rounded">
+
+                        <div class="text-xl mb-2">
+                            Información del valor de tu reserva
+                        </div>
+
+                        <div class="flex flex-col space-y-2 mb-2">
+                            <div class="font-medium">
+                                Valor base: {{data.room.cost | currency:'USD'}}
+                            </div>
+                            <div>
+                                <div class="font-medium mb-1">
+                                    Impuestos:
+                                </div>
+                                
+                                <table class="min-w-full bg-white rounded-md overflow-hidden">
+                                    <thead>
+                                        <tr class="bg-gray-100 border-b">
+                                            <th class="p-3 text-left">Nombre</th>
+                                            <th class="p-3 text-left">Porcentaje</th>
+                                            <th class="p-3 text-left">Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngFor="let tax of data.room.taxes">
+                                            <tr class="border-b hover:bg-gray-50">
+                                                <td class="p-3">{{ tax.value }}</td>
+                                                <td class="p-3">{{ tax.percentage * 100 }}%</td>
+                                                <td class="p-3">{{ (data.room.cost * tax.percentage) | currency:'USD' }}</td>
+                                            </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="font-medium">
+                                Valor total: {{totalPrice | currency:'USD'}}
+                            </div>
+                            <div class="font-medium">
+                                Cantidad de húespedes: {{data.initalDataReservation.countGuest}}
+                            </div>
+                        </div>
+
+                        <div class="text-xl mb-2">
+                            Contacto de emergencia
+                        </div>
+
+                        <div class="flex flex-col">
+
+                            <div class="flex flex-col sm:items-center sm:flex-row w-full space-y-2 sm:space-x-4 sm:space-y-0">
+
+                                <mat-form-field class="w-full">
+                                    <mat-label>Nombre completo</mat-label>
+                                    <input type="text"  formControlName="fullName" matInput required>
+                                    <mat-error *ngIf="reservationForm.get('emergencyContact')?.get('fullName')?.hasError('minlength')">
+                                        Mínimo 3 caracteres
+                                    </mat-error>
+                                    <mat-error *ngIf="reservationForm.get('emergencyContact')?.get('fullName')?.hasError('required')">
+                                        Nombre requerido
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="w-full">
+                                    <mat-label>Teléfono</mat-label>
+                                    <input type="text"  formControlName="contactPhone" matInput required>
+                                    <mat-error *ngIf="reservationForm.get('emergencyContact')?.get('contactPhone')?.hasError('pattern')">
+                                        Solo números
+                                    </mat-error>
+                                    <mat-error *ngIf="reservationForm.get('emergencyContact')?.get('contactPhone')?.hasError('minlength')">
+                                        Mínimo 3 caracteres
+                                    </mat-error>
+                                    <mat-error *ngIf="reservationForm.get('emergencyContact')?.get('contactPhone')?.hasError('required')">
+                                        Nombre requerido
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+
+                            <div class="flex flex-row justify-center">
+                                <button
+                                mat-raised-button
+                                [color]="'primary'"
+                                [disabled]="horizontalStepperStep1.stepControl.invalid"
+                                type="button"
+                                matStepperNext>
+                                <mat-icon
+                                    class=" mr-2">
+                                    navigate_next
+                                </mat-icon>
+                                <span>Siguiente</span>
+                        </button>
+                            </div>
+
+                           
+
+                        </div>
+
+                    </div>
+
+                </mat-step>
+
+                <ng-container formArrayName="guests">
+
+                    <ng-container *ngFor="let guestControl of guestsArray.controls; let i = index">
+
+                        <mat-step
+                                [stepControl]="guestControl"
+                                [label]="'Huésped ' + (i + 1)">
+
+                            <div [formGroupName]="i">
+                                <div class="p-2 sm:p-4 border-cyan-900 border-1 sm:border-4 rounded">
+    
+                                    <div class="text-xl mb-2">
+                                        Información del huésped {{ i + 1 }}
+                                    </div>
+        
+                                    <div class="flex flex-col space-y-2">
+                                        
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Nombre completo</mat-label>
+                                            <input type="text" formControlName="fullName" matInput required>
+                                            <mat-error *ngIf="guestControl.get('fullName')?.hasError('minlength')">
+                                                Mínimo 3 caracteres
+                                            </mat-error>
+                                            <mat-error *ngIf="guestControl.get('fullName')?.hasError('required')">
+                                                Nombre requerido
+                                            </mat-error>
+                                        </mat-form-field>
+        
+                                        <div class="flex flex-col sm:items-center sm:flex-row w-full space-y-2 sm:space-x-4 sm:space-y-0">
+        
+                                            <mat-form-field class="w-full">
+                                                <mat-label>Fecha de nacimiento</mat-label>
+                                                <input [matDatepicker]="pickerbirthDate" formControlName="birthDate" matInput [max]="maxDate" required>
+                                                <mat-datepicker  #pickerbirthDate></mat-datepicker>
+                                                <mat-datepicker-toggle matIconSuffix [for]="pickerbirthDate">
+                                                </mat-datepicker-toggle>
+                                                <mat-hint class="dark:text-white">DD-MM-YYYY</mat-hint>
+                                                <mat-error *ngIf="guestControl.get('birthDate')?.hasError('required')">
+                                                    Fecha requerida
+                                                </mat-error>
+                                            </mat-form-field>
+        
+                                            <mat-form-field class="w-full">
+                                                <mat-label>Genero</mat-label>
+                                                <mat-select formControlName="gender" required>
+                                                  <mat-option *ngFor="let gender of genders" [value]="gender">
+                                                    {{gender.value}}
+                                                  </mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="guestControl.get('gender')?.hasError('required')">
+                                                    Genero requerido
+                                                </mat-error>
+                                            </mat-form-field>
+        
+                                        </div>
+        
+                                        <div class="flex flex-col sm:items-center sm:flex-row w-full space-y-2 sm:space-x-4 sm:space-y-0">
+        
+                                            <mat-form-field class="w-full">
+                                                <mat-label>Tipo de documento</mat-label>
+                                                <mat-select formControlName="documentType" required>
+                                                  <mat-option *ngFor="let type of documentTypes" [value]="type">
+                                                    {{type.value}}
+                                                  </mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="guestControl.get('documentType')?.hasError('required')">
+                                                    Tipo requerido
+                                                </mat-error>
+                                            </mat-form-field>
+        
+                                            <mat-form-field class="w-full">
+                                                <mat-label>Número de documento</mat-label>
+                                                <input type="text" formControlName="documentNumber" matInput required>
+                                                <mat-error *ngIf="guestControl.get('documentNumber')?.hasError('minlength')">
+                                                    Mínimo 3 caracteres
+                                                </mat-error>
+                                                <mat-error *ngIf="guestControl.get('documentNumber')?.hasError('required')">
+                                                    Número de documento requerido
+                                                </mat-error>
+                                            </mat-form-field>
+        
+                                        </div>
+        
+                                        <div class="flex flex-col sm:items-center sm:flex-row w-full space-y-2 sm:space-x-4 sm:space-y-0">
+        
+                                            <mat-form-field class="w-full">
+                                                <mat-label>Email</mat-label>
+                                                <input type="email" formControlName="email" matInput required>
+                                                <mat-error *ngIf="guestControl.get('email')?.hasError('email')">
+                                                    Email inválido
+                                                </mat-error>
+                                                <mat-error *ngIf="guestControl.get('email')?.hasError('required')">
+                                                    Email requerido
+                                                </mat-error>
+                                            </mat-form-field>
+                                            
+                                            <mat-form-field class="w-full">
+                                                <mat-label>Número de teléfono</mat-label>
+                                                <input type="tel" formControlName="phoneNumber" matInput required>
+                                                <mat-error *ngIf="guestControl.get('phoneNumber')?.hasError('pattern')">
+                                                    Solo números
+                                                </mat-error>
+                                                <mat-error *ngIf="guestControl.get('phoneNumber')?.hasError('minlength')">
+                                                    Mínimo 3 caracteres
+                                                </mat-error>
+                                                <mat-error *ngIf="guestControl.get('phoneNumber')?.hasError('required')">
+                                                    Número de teléfono requerido
+                                                </mat-error>
+                                            </mat-form-field>
+        
+                                        </div>
+
+                                    </div>
+        
+                                    <div class="mt-4 flex flex-row space-x-2 justify-center">
+                                        <button
+                                                mat-raised-button 
+                                                [color]="'primary'" 
+                                                type="button" 
+                                                matStepperPrevious>
+                                            <mat-icon class="mr-2">navigate_before</mat-icon>
+                                            <span>Anterior</span>
+                                        </button>
+        
+                                        <button *ngIf="i !== data.initalDataReservation.countGuest - 1" 
+                                                mat-raised-button 
+                                                [color]="'primary'" 
+                                                [disabled]="guestControl.invalid"
+                                                type="button" 
+                                                matStepperNext>
+                                            <mat-icon class="mr-2">navigate_next</mat-icon>
+                                            <span>Siguiente</span>
+                                        </button>
+        
+                                        <button *ngIf="i === data.initalDataReservation.countGuest - 1"  
+                                                mat-raised-button 
+                                                [color]="'primary'" 
+                                                [disabled]="guestControl.invalid"
+                                                type="button"
+                                                (click)="createReservation()">
+                                            <mat-icon class="mr-2">check</mat-icon>
+                                            <span>Finalizar reserva</span>
+                                        </button>
+                                    </div>
+        
+                                </div>
+                            </div>
+    
+                            
+                        </mat-step>
+    
+                    </ng-container>
+
+                </ng-container>
+                   
+                
+                
+                
+            </mat-horizontal-stepper>
+
+        </form>
+
+
+    </div>
+
+</div>
