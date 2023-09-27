@@ -50,7 +50,7 @@
         </button>
         <button mat-raised-button color="primary" (click)="goToRooms()">
             <mat-icon class="mr-2">hotel</mat-icon>
-            <span>Habitaciones</span>
+            <span>{{this.user?.type?.id === 'agency' ? 'Habitaciones' : 'Reservar'}}</span>
         </button>
         <button mat-raised-button color="primary"  (click)="goToReservations()">
             <mat-icon class="mr-2">local_play</mat-icon>

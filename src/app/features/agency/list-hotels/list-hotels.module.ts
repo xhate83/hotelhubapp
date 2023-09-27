@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
 import { ListHotelsComponent } from './list-hotels.component';
+import { MatRippleModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,6 +31,7 @@ const routes: Route[] = [
     MatButtonModule,
     MatSlideToggleModule,
     MatIconModule,
+    MatRippleModule,
     SharedModule,
     HeaderFeatureComponent
   ]

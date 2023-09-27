@@ -2,7 +2,7 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core'
 import { CommonModule } from '@angular/common';
-import { ModeAppService } from 'src/app/core/mode-app.service';
+import { ModeAppService } from '../../core/mode-app.service';
 
 @Component({
   selector: 'app-mode-app',

@@ -3,12 +3,10 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IFilterRooms } from '../../../../models/filter-rooms';
 import { IRoom } from '../../../../models/room.model';
-import { IReservation } from '../../../../models/reservation.model';
 import { generateId } from '../../../../shared/utilities/static-functions';
 import { AuthService } from '../../../../core/auth.service';
 import { GENDER, DOCUMENT_TYPES } from '../../../../core/master-data';
-import { IGender } from '../../../../models/reservation.model';
-import { IDocumentType } from '../../../../models/reservation.model';
+import { IDocumentType, IGender, IReservation } from '../../../../models/reservation.model';
 
 
 @Component({

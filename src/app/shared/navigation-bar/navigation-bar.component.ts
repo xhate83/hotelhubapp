@@ -3,13 +3,13 @@ import { MatIconModule } from '@angular/material/icon';4
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '../shared.module';
 import { CommonModule } from '@angular/common';
-import { IUser } from 'src/app/models/user.model';
-import { AuthService } from 'src/app/core/auth.service';
+import { IUser } from '../../models/user.model';
+import { AuthService } from '../../core/auth.service';
 import { Subject, takeUntil } from 'rxjs';
 import { SnackBarService } from '../utilities/snack-bak.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router } from '@angular/router';
-import { ModeAppComponent } from 'src/app/shared/mode-app/mode-app.component';
+import { ModeAppComponent } from '../../shared/mode-app/mode-app.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationComponent } from '../utilities/confirmation/confirmation.component';
 

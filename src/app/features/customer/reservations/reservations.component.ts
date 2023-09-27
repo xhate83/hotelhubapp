@@ -52,7 +52,7 @@ export class ReservationsComponent implements OnDestroy, OnInit {
           }
           return 0;
         });
-        this.reservations.map(reservation => { 
+        this.reservations.forEach(reservation => { 
           if(reservation.hotel) {
             reservation.hotel.rooms = []}
           }
@@ -69,7 +69,9 @@ export class ReservationsComponent implements OnDestroy, OnInit {
   openReservationDetail(reservation: IReservation): void {
     this._matDialog.open(ReservationDetailComponent, {
       autoFocus: false,
-      data: reservation
+      data: reservation,
+      maxHeight: '95vh',
+      maxWidth: '95vw',
     })
   }
 

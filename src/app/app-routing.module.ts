@@ -1,4 +1,4 @@
-import { NgModule, inject } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authenticationGuard, notAuthenticationGuard, userTypeGuard } from './core/guards';
 import { LayoutComponent } from './layout/layout.component';

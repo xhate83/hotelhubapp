@@ -14,7 +14,7 @@ export class GridCardDirective {
 
   private setStyles(): void {
     const classes = [
-      'text-gray-50', 'bg-cyan-700', 'dark:bg-gray-900', 'p-4', 'flex', 'flex-col', 'items-center', 'justify-between', 'space-y-4', 'rounded-lg'
+      'text-gray-50', 'bg-cyan-700', 'dark:bg-gray-900', 'p-4', 'flex', 'flex-col', 'items-center', 'justify-between', 'rounded-lg'
     ];
 
     classes.forEach(cls => {

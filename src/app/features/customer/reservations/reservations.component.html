@@ -8,21 +8,24 @@
             <ng-container *ngFor="let reservation of reservations">
                 <div appGridCard>
 
-                    <div class="flex flex-col w-full space-y-2">
-                        <div class="text-sm border-b-2">
-                            ID de reserva: {{reservation.id}}
+                    <div class="flex flex-col w-full space-y-2 mb-2 sm:mb-3">
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400">ID de reserva:</span> {{reservation.id}}
                         </div>
-                        <div class="text-sm border-b-2">
-                            Hotel: {{reservation.hotel?.name}}
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400">Hotel:</span> {{reservation.hotel?.name}}
                         </div>
-                        <div class="text-sm border-b-2">
-                            Habitación Id: {{reservation.room?.id}}
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400">Habitación Id:</span> {{reservation.room?.id}}
                         </div>
-                        <div class="text-sm border-b-2">
-                            Total: {{reservation.totalPrice | currency:'USD'}}
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400"># Huéspedes:</span> {{reservation.guests.length}}
                         </div>
-                        <div class="text-sm">
-                            Ubicación: {{reservation.room?.ubication?.value}}
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400">Total:</span> {{reservation.totalPrice | currency:'USD'}}
+                        </div>
+                        <div>
+                            <span class="font-medium text-yellow-400">Ubicación:</span> {{reservation.room?.ubication?.value}}
                         </div>
                     </div>
                     

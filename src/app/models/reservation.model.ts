@@ -7,7 +7,7 @@ export interface IReservation {
     createdBy: string;
     dateStart: Date | string;
     dateEnd: Date | string;
-    guest: IReservationGuest[];
+    guests: IReservationGuest[];
     emergencyContact: IEmergencyContact;
     hotelId: number;
     roomId: number;
@@ -28,8 +28,8 @@ export interface IReservationGuest {
 }
 
 export interface IEmergencyContact {
-    name: string;
-    cellphone: string;
+    fullName: string;
+    contactPhone: string;
 }
 
 

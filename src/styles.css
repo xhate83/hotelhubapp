@@ -2,6 +2,13 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+
+.mat-icon-xl-custom {
+    font-size: 100px !important; 
+    width: 100px !important;
+    height: 100px !important;
+}
+
 .mat-icon-lg-custom {
     font-size: 50px !important; 
     width: 50px !important;

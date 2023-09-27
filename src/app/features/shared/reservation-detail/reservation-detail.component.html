@@ -1,18 +1,194 @@
+<div  class="w-fill bg-cyan-700 dark:bg-gray-700 p-2 sm:p-4">
 
-<mat-dialog-content class="mat-typography bg-cyan-700 dark:bg-gray-700">
-    <div class="flex flex-col items-center space-y-4">
+    <div class="flex flex-row items-center justify-between mb-1">
 
-        <mat-icon class="h-auto w-auto mat-icon-lg-custom text-gray-50 dark:text-cyan-600">info</mat-icon>
+        <div class="flex flex-row items-center">
+            <mat-icon class="hidden sm:flex mat-icon-lg-custom text-gray-50 dark:text-cyan-600 mr-2">local_play</mat-icon>
+            <div class="text-white text-2xl">
+                Tu reserva con Id: {{reservation.id}}
+            </div>
+        </div>
+        
+        <button mat-icon-button (click)="dialogRef.close(false)" class="">
+            <mat-icon class="text-gray-50">close</mat-icon>
+        </button>
 
-        <div class="text-center text-md sm:text-xl text-gray-50 dark:text-gray-50 ">
-            {{reservation | json}}
+    </div>
+
+    <div class="text-white mb-2 sm:mb-4 flex flex-col sm:p-4 border-cyan-900 border-1 sm:border-4 rounded">
+        <div class="text-xl sm:text-2xl mb-2">
+            Información General
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:justify-between mb-1 space-y-1 sm:space-y-0 sm:space-x-2">
+
+            <div>
+                <span class="font-medium text-yellow-400">Hotel:</span> {{reservation.hotel?.name}}
+            </div>
+
+            <div>
+                <span class="font-medium text-yellow-400">Habitación Id:</span> {{reservation.room?.id}}
+            </div>
+
+            <div>
+                <span class="font-medium text-yellow-400">Tipo Habitación:</span> {{reservation.room?.type?.value}}
+            </div>
+        </div>
+
+        <div class="flex flex-row mb-1">
+            <div>
+                <span class="font-medium text-yellow-400">Descripción:</span> {{reservation.room?.description}}
+            </div>
+            
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:justify-between space-y-1 sm:space-y-0 mb-1 sm:space-x-2">
+            <div>
+                <span class="font-medium text-yellow-400">Ubicación:</span> {{reservation.room?.ubication?.value}}
+            </div>
+            <div>
+                <span class="font-medium text-yellow-400"># Huéspedes:</span> {{reservation.guests.length}}
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2">
+            <div>
+                <span class="font-medium text-yellow-400">Fecha entrada:</span> {{reservation.dateStart | date}}
+            </div>
+            <div>
+                <span class="font-medium text-yellow-400">Fecha salida:</span> {{reservation.dateEnd | date}}
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="sm:hidden mt-1 mb-3 h-1 w-full bg-cyan-800 dark:bg-gray-900"></div>
+
+    <div class="text-white mb-2 sm:mb-4 flex flex-col sm:p-4 border-cyan-900 border-1 sm:border-4 rounded">
+        <div class="text-xl sm:text-2xl mb-2">
+            Información financiera
+        </div>
+
+        <div class="font-medium sm:text-xl mb-1">
+            <span class="font-medium text-yellow-400">Valor base:</span> {{reservation.room?.cost | currency:'USD'}}
+        </div>
+       
+        <div class="font-medium sm:text-lg mb-1">
+            <span class="font-medium text-yellow-400">Impuestos:</span>
+        </div>
+        
+        <table class="mb-2 min-w-full bg-cyan-800 rounded-md overflow-hidden dark:bg-gray-900">
+            <thead>
+                <tr class="bg-cyan-800 border-b dark:bg-gray-800 dark:border-gray-600">
+                    <th class="p-3 text-left text-gray-50">Nombre</th>
+                    <th class="p-3 text-left text-gray-50">Porcentaje</th>
+                    <th class="p-3 text-left text-gray-50">Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let tax of reservation.room?.taxes || []">
+                    <tr class="border-b hover:bg-cyan-900 dark:border-gray-600 dark:hover:bg-gray-800">
+                        <td class="p-3 text-gray-300">{{ tax.value }}</td>
+                        <td class="p-3 text-gray-300">{{ tax.percentage * 100 }}%</td>
+                        <td class="p-3 text-gray-300">{{ ((reservation.room?.cost || 0) * tax.percentage) | currency:'USD' }}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    
+        <div class="font-medium sm:text-xl">
+            <span class="font-medium text-yellow-400">Valor total:</span> {{reservation.totalPrice | currency:'USD'}}
+        </div>
+    </div>
+
+    <div class="sm:hidden mt-1 mb-3 h-1 w-full bg-cyan-800 dark:bg-gray-900"></div>
+
+    <div class="text-white mb-2 sm:mb-4 flex flex-col sm:p-4 border-cyan-900 border-1 sm:border-4 rounded">
+        <div class="text-xl sm:text-2xl mb-2">
+            Contácto de emergencia
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2">
+            <div>
+                <span class="font-medium text-yellow-400">Nombre:</span> {{reservation.emergencyContact.fullName}}
+            </div>
+
+            <div>
+                <span class="font-medium text-yellow-400">Teléfono:</span> {{reservation.emergencyContact.contactPhone}}
+            </div>
+            
         </div>
 
     </div>
 
-</mat-dialog-content>
+    <div class="sm:hidden mt-1 mb-3 h-1 w-full bg-cyan-800 dark:bg-gray-900"></div>
 
-<mat-dialog-actions align="center" class="bg-cyan-700 dark:bg-gray-700">
-    <button mat-raised-button color="warn" (click)="dialogRef.close(true)">Si</button>
-    <button mat-raised-button color="primary" (click)="dialogRef.close(false)">No</button>
-</mat-dialog-actions>
+    <div class="mb-2 sm:mb-4 flex flex-col">
+        <div class="text-white text-xl sm:text-2xl mb-2">
+           Huéspedes
+        </div>
+
+        <mat-horizontal-stepper class="rounded"
+        [disableRipple]="true"
+        [labelPosition]="'bottom'">
+
+            <ng-container *ngFor="let guest of reservation.guests; let i = index">
+
+                <mat-step 
+                [label]="'Huésped ' + (i + 1)">
+
+                 <div class="flex flex-col space-y-2">
+                    <div>
+                        <span class="font-medium text-gray-700">Nombre:</span> {{guest.fullName}}
+                    </div>
+
+                    <div class="space-y-2 sm:space-y-0 flex flex-col sm:flex-row sm:justify-between sm:space-x-2">
+                        <div>
+                            <span class="font-medium text-gray-700">Fecha nacimiento:</span> {{guest.birthDate | date}}
+                        </div>
+                        <div>
+                            <span class="font-medium text-gray-700">Genero:</span> {{guest.gender.value}}
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 sm:space-y-0 flex flex-col sm:flex-row sm:justify-between sm:space-x-2">
+                        <div>
+                            <span class="font-medium text-gray-700">Tipo documento:</span> {{guest.documentType.value}}
+                        </div>
+                        <div>
+                            <span class="font-medium text-gray-700">Número de documento:</span> {{guest.documentNumber}}
+                        </div>
+                    </div>
+                    <div class="space-y-2 sm:space-y-0 flex flex-col sm:flex-row sm:justify-between sm:space-x-2">
+                        <div>
+                            <span class="font-medium text-gray-700">Correo:</span> {{guest.email}}
+                        </div>
+                        <div>
+                            <span class="font-medium text-gray-700">Teléfono:</span> {{guest.phoneNumber}}
+                        </div>
+                    </div>
+
+                 </div>
+
+                </mat-step> 
+            </ng-container>
+
+        </mat-horizontal-stepper>
+       
+
+    </div>
+
+
+    <div class="flex flex-row justify-center">
+        <button
+        mat-raised-button
+        [color]="'warn'"
+        type="button"
+        (click)="dialogRef.close()"
+        >
+        Cerrar
+        </button>
+    </div>
+
+   
+</div>

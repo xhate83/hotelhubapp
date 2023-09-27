@@ -4,29 +4,27 @@
     <div class="mt-4">
         <app-filter-rooms  (filterChanged)="onFilterChange($event)" (filterCleaned)="onFilterCleaned($event)"></app-filter-rooms>
     </div>
-   
-
     <div class="mt-4">
 
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-4" [ngClass]="{'sm:grid-cols-4' : rooms.length > 0}">
             <ng-container *ngFor="let room of rooms">
                 <div appGridCard>
 
-                    <div class="flex flex-col w-full space-y-2">
-                        <div class="text-sm border-b-2">
-                            Hotel: {{room.hotel?.name}}
+                    <div class="flex flex-col w-full space-y-2 mb-2 sm:mb-3">
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400">Hotel:</span> {{room.hotel?.name}}
                         </div>
-                        <div class="text-sm border-b-2">
-                            Descipción: {{room.description}}
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400">Descripción:</span> {{room.description}}
                         </div>
-                        <div class="text-sm border-b-2">
-                            Costo: {{room.cost | currency:'USD'}} más impuestos
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400">Costo:</span> {{room.cost | currency:'USD'}} más impuestos
                         </div>
-                        <div class="text-sm border-b-2">
-                            Tipo: {{room.type.value}}
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400">Tipo:</span> {{room.type.value}}
                         </div>
-                        <div class="text-sm">
-                            Ubicación: {{room.ubication.value}}
+                        <div>
+                            <span class="font-medium text-yellow-400">Ubicación:</span> {{room.ubication.value}}
                         </div>
                     </div>
                     
@@ -42,6 +40,17 @@
                 <div appGridCard>
                     <div class="text-xl sm:text-4xl text-white text-center">
                         No se encontraron habitaciónes disponibles
+                        <mat-icon>
+                            notification_important  
+                        </mat-icon>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="!filterActive">
+                <div appGridCard>
+                    <div class="text-xl sm:text-4xl text-white text-center">
+                        Utiliza los filtros para encontrar habitaciones
                         <mat-icon>
                             notification_important  
                         </mat-icon>

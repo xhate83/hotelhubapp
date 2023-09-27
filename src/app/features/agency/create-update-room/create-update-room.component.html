@@ -50,7 +50,8 @@
                     <mat-form-field class="w-full">
                         <mat-label>Costo</mat-label>
                         <input type="number"  formControlName="cost" matInput required>
-                        <div matSuffix>
+                        <span matTextPrefix>$&nbsp;</span>
+                        <div matTextSuffix>
                             USD
                         </div>
                         <mat-error *ngIf="roomForm.get('cost')?.hasError('min')">

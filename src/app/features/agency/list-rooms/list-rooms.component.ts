@@ -7,7 +7,7 @@ import { RoomService } from '../../../services/room.service';
 import { HotelService } from '../../../services/hotel.service';
 import { IState } from '../../../models/state.model';
 import { Router } from '@angular/router';
-import { IHotel } from 'src/app/models/hotel.model';
+import { IHotel } from '../../../models/hotel.model';
 
 
 @Component({

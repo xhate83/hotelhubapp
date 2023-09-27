@@ -2,13 +2,12 @@ import { Component, OnDestroy, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil  } from 'rxjs';
 import { SnackBarService } from '../../../shared/utilities/snack-bak.service';
-import { AuthService } from '../../../core/auth.service';
 import { STATES, ROOM_TYPES, CITIES, TAXES } from '../../../core/master-data';
 import { IHotel } from '../../../models/hotel.model';
 import { generateId } from '../../../shared/utilities/static-functions';
 import { RoomService } from '../../../services/room.service';
-import { IRoom } from 'src/app/models/room.model';
-import { HotelService } from 'src/app/services/hotel.service';
+import { IRoom } from '../../../models/room.model';
+import { HotelService } from '../../../services/hotel.service';
 
 
 @Component({

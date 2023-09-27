@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
 import { ListRoomsComponent } from './list-rooms.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRippleModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../../../shared/shared.module';
@@ -31,6 +32,7 @@ const routes: Route[] = [
     RouterModule.forChild(routes),
     MatButtonModule,
     MatSlideToggleModule,
+    MatRippleModule,
     MatIconModule,
     SharedModule,
     HeaderFeatureComponent
