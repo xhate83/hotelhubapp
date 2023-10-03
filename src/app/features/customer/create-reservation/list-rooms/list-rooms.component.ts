@@ -44,7 +44,7 @@ export class ListRoomsComponent implements OnDestroy, OnInit {
   onFilterChange(filterData: IFilterRooms) {
    
     this.initalDataReservation = {...filterData}
-    this._getRoomsByFilter(filterData.ubicationIds);
+    this._getRoomsByFilter(filterData.ubicationIds, filterData.countGuest);
   }
 
   onFilterCleaned(e:boolean) {
@@ -72,8 +72,8 @@ export class ListRoomsComponent implements OnDestroy, OnInit {
     })
   }
 
-  private _getRoomsByFilter(ubicationIds: number[]): void {
-    this._reservationService.getAvailableRoomsByUbications(ubicationIds).pipe(takeUntil(this._unsubscribeAll))
+  private _getRoomsByFilter(ubicationIds: number[], capacity: number): void {
+    this._reservationService.getAvailableRooms(ubicationIds, capacity).pipe(takeUntil(this._unsubscribeAll))
     .subscribe(rooms => {
       this.rooms = rooms;
       this.filterActive = true;

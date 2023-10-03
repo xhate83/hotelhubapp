@@ -15,6 +15,7 @@ export interface IRoom {
     hotelId: number;
     hotel?: IHotel;
     reservations?: IReservation[];
+    capacity: number;
 }
 
 export interface IRoomType {

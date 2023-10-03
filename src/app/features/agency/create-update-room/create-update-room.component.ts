@@ -99,7 +99,8 @@ export class CreateUpdateRoomComponent implements OnDestroy, OnInit {
       type: [null, Validators.required],
       ubication: [null, Validators.required],
       taxes: [[], Validators.required],
-      hotelId: [null, Validators.required]
+      hotelId: [null, Validators.required],
+      capacity: [null, [Validators.required, Validators.min(1)]]
     });
   }
 

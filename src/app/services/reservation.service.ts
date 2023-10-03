@@ -98,7 +98,7 @@ export class ReservationService {
     );
 }
 
-  public getAvailableRoomsByUbications(ubicationsIds: number[]): Observable<IRoom[]> {
+  public getAvailableRooms(ubicationsIds: number[], capacity: number): Observable<IRoom[]> {
     return this._dataBaseService.getData().pipe(
         map((hotels: IHotel[]) => {
             const availableHotels = hotels.filter(hotel => hotel.state.id === 'available');
@@ -106,7 +106,8 @@ export class ReservationService {
                 if (!hotel.rooms) {
                     return [];
                 }
-                const filteredRooms = hotel.rooms.filter(room => ubicationsIds.includes(room.ubication.id) && room.state.id === 'available');
+                const filteredRooms = hotel.rooms.filter(room => ubicationsIds.includes(room.ubication.id) && room.state.id === 'available' &&
+                room.capacity >= capacity);
                 
                 filteredRooms.forEach(room => {
                     const { rooms, ...hotelWithoutRooms } = hotel;
@@ -120,7 +121,7 @@ export class ReservationService {
     );
   }
 
-public getAllReservations(): Observable<IReservation[]> {
+  public getAllReservations(): Observable<IReservation[]> {
   return this._dataBaseService.getData().pipe(
     map((hotels: IHotel[]) => {
       const allReservations = hotels.flatMap(hotel => {

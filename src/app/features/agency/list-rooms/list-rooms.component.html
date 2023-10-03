@@ -28,7 +28,10 @@
                             <span class="font-medium  text-yellow-400">Hotel:</span> {{room.hotel?.name}}
                         </div>
                         <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
-                            <span class="font-medium text-yellow-400">Descipción:</span> {{room.description}}
+                            <span class="font-medium text-yellow-400">Descripción:</span> {{room.description}}
+                        </div>
+                        <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
+                            <span class="font-medium text-yellow-400">Capacidad:</span> {{room.capacity}} {{room.capacity === 1 ? 'persona' : 'personas'}}
                         </div>
                         <div class="border-b-2 border-yellow-200 dark:border-cyan-700">
                             <span class="font-medium text-yellow-400">Costo:</span> {{room.cost | currency:'USD'}}
