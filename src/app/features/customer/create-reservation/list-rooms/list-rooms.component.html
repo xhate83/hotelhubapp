@@ -32,7 +32,7 @@
                     </div>
                     
                     <div class="w-full flex flex-row items-center justify-between space-x-2">
-                        <button mat-raised-button color="primary" (click)="openModalCreateRervation(room)">
+                        <button mat-raised-button color="primary" (click)="openModalCreateRervation(room)" [disabled]="isSaving">
                             Reservar
                         </button>
                     </div>

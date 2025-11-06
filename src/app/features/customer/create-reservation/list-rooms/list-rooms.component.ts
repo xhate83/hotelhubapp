@@ -28,6 +28,7 @@ export class ListRoomsComponent implements OnDestroy, OnInit {
   roomsStates = [...STATES];
   initalDataReservation!: IFilterRooms | null;
   filterActive = false;
+  isSaving = false;
 
   ngOnInit(): void {
       this._reservationService.reservations$.pipe(takeUntil(this._unsubscribeAll))
@@ -81,7 +82,7 @@ export class ListRoomsComponent implements OnDestroy, OnInit {
   }
 
   private _reserveRoom(room: IRoom, reservation: IReservation ): void {
-
+    this.isSaving = true;   
     this._reservationService.reserveRoom(room.hotelId, room.id, reservation).pipe(takeUntil(this._unsubscribeAll))
     .subscribe(res => {
       if(res) {
@@ -90,6 +91,7 @@ export class ListRoomsComponent implements OnDestroy, OnInit {
       }else {
         this._snackBarService.openSnackBar('No se pudo crear la reserva', '⛔');
       }
+      this.isSaving = false;
     })
   }
 
